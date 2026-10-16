@@ -270,16 +270,6 @@ button{font-family:inherit}
 .home-btn:hover,.home-btn:focus-visible{background:rgba(152,189,32,.14);border-color:rgba(152,189,32,.5);outline:none}
 .home-btn:hover::before,.home-btn:focus-visible::before{opacity:1}
 .home-btn:hover svg{opacity:1;transform:translateX(3px)}
-.home-side{color:#fff}
-.home-side .ov{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--lime)}
-.home-side h1{font-size:34px;line-height:1.15;margin:12px 0 14px;font-weight:800;letter-spacing:-.02em}
-.home-side p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.72);margin:0 0 22px;max-width:500px}
-.hs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.hs{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px}
-.hs .l{font-size:11px;color:rgba(255,255,255,.6);font-weight:600}
-.hs .v{font-size:24px;font-weight:800;margin-top:6px;color:#fff}
-.hs .v em{font-style:normal;color:var(--lime)}
-.home-note{font-size:11px;color:rgba(255,255,255,.5);margin-top:16px}
 .home-tag{color:rgba(255,255,255,.62);font-size:13px;font-weight:600;letter-spacing:.02em}
 
 /* ---------- mobile (stacked) ---------- */
@@ -319,7 +309,6 @@ body.mobile .bq-mid .chart{top:36px}
 body.mobile .rc{grid-template-columns:1fr auto;padding:14px 16px}
 body.mobile .rc-m{grid-column:span 2;justify-content:start}
 body.mobile .kpi .k-v{font-size:22px}
-body.mobile .home-side h1{font-size:26px}
 body.mobile .home-menu{gap:8px}
 body.mobile .page#p-accueil.on{background:var(--navy)}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
@@ -680,7 +669,7 @@ function sidebar(pg, ai){
   const top=107+ai*46, bot=top+46;
   B(pg,{x:14,y:14,w:221,h:top-14,cls:'sb sb-top',m:'hide',html:`<div class="sb-logo">${logo(44)}</div>`});
   B(pg,{x:14,y:top,w:221,h:46,cls:'sb-row',m:'hide'});
-  B(pg,{x:14,y:bot,w:221,h:705-bot,cls:'sb sb-bot',m:'hide',html:`<div class="sb-foot"><b>DONNÉES FICTIVES</b><br>Démo portfolio · réplique HTML<br>d’un rapport Power BI<br>Données au 30/09/2026</div>`});
+  B(pg,{x:14,y:bot,w:221,h:705-bot,cls:'sb sb-bot',m:'hide',html:`<div class="sb-foot"><b>DONNÉES FICTIVES</b></div>`});
   NAV.forEach((p,i)=>{ const b=B(pg,{tag:'button',x:44,y:110+i*46,w:185,h:40,cls:'nav-btn'+(i===ai?' on':''),m:'hide'}); b.type='button'; b.textContent=p.name;
     if(i===ai) b.setAttribute('aria-current','page'); else b.addEventListener('click',()=>go(p.id)); });
 }
@@ -692,23 +681,8 @@ function buildHome(pg){
   const menu=B(pg,{x:108,y:246,w:400,h:440,cls:'home-menu',m:'full',mh:'auto'});
   menu.innerHTML=NAV.map((p,i)=>`<button type="button" class="home-btn" data-go="${p.id}"><span><span class="n">0${i+1}</span>${p.name}</span><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="#98BD20" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`).join('');
   menu.addEventListener('click',e=>{ const b=e.target.closest('[data-go]'); if(b) go(b.dataset.go); });
-  B(pg,{x:640,y:150,w:540,h:470,cls:'home-side',m:'full',mh:'auto',html:`
-    <div class="ov">PORTFOLIO · POWER BI → HTML</div>
-    <h1>Pilotage des ventes, du financement et du réseau de points de vente</h1>
-    <p>Sept vues pour suivre le chiffre d’affaires, la marge, la transformation des dossiers de crédit, la performance des showrooms, des banques partenaires et des commerciaux. Les filtres de chaque page recalculent tous les visuels.</p>
-    <div class="hs-grid">
-      <div class="hs"><div class="l">CA HT 2026 (jan.–sep.)</div><div class="v" id="hm-1"></div></div>
-      <div class="hs"><div class="l">Dossiers déposés 2026</div><div class="v" id="hm-2"></div></div>
-      <div class="hs"><div class="l">Taux de transformation</div><div class="v" id="hm-3"></div></div>
-      <div class="hs"><div class="l">Points de vente actifs</div><div class="v" id="hm-4"></div></div>
-    </div>
-    <div class="home-note">Toutes les données sont fictives et générées aléatoirement — aucun chiffre réel.</div>`});
 }
-function renderHome(){
-  const a=agg(sel({y:CUR_Y}));
-  $('hm-1').innerHTML=money(a.ca).replace(' DA','<em> DA</em>'); $('hm-2').textContent=int(a.n); $('hm-3').textContent=pct(a.nF/a.n);
-  $('hm-4').textContent=POS.filter(p=>p.status==='ACTIF').length+' / '+POS.length;
-}
+function renderHome(){}
 
 /* ---------- Vue Ensemble ---------- */
 function buildVE(pg){

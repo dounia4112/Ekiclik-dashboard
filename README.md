@@ -12,7 +12,7 @@ An interactive web version of a multi-page **Power BI** report for tracking sale
 
 | Page | What it shows |
 |---|---|
-| **Accueil** | Landing page with navigation and headline figures |
+| **Accueil** | Landing page with links to every report page |
 | **Vue Ensemble** | Revenue (CA HT/TTC), net margin, COGS, conversion rate, financed files; year-to-date vs target; YoY change; revenue by month, POS, category and region |
 | **Suivi par Région** | Revenue by region and category, monthly trend per region, wilaya map, point-of-sale performance table, geographic POS map |
 | **Suivi par SWRM** | Showroom revenue trend, showroom share of total revenue, revenue vs target per showroom, projection, remaining-to-do (RAF), achievement rate (R/O), gap, waterfall of monthly gaps |
